@@ -9,32 +9,55 @@ import SinglePost from './Components/SinglePost';
 import Login from './Components/Login';
 import SignUp from './Components/SignUp';
 import axios from 'axios';
+require("dotenv").config();
+//const host = process.env.BACKEND_URL || "http://localhost:5000";
 
 function App() {
   const user = false;
 
+
   const [posts, setPosts] = useState([]);
 
+  function setHost() {
+    let host;
+    if (process.env.NODE_ENV === 'development') {
+      host = "http://localhost:3001";
+      return host;
+    } // else {
+    //   //will need heroku url here
+    //   return "http://localhost:5000";
+    // }
+  }
+
+  const getPosts = async () => {
+    const response = await axios.get(`${setHost()}/blogs`);
+    setPosts(response.data);
+    console.log("posts:", posts);
+    console.log("response:", response.data);
+
+  }
   useEffect(() => {
-    const getPosts = async () => {
+    getPosts();
+  }, []);
 
 
 
-      return (
-        <div className="App">
-          <NavBar />
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/create" element={user ? <CreatePost /> : <Login />} />
-            <Route exact path="/post/:id" element={<SinglePost />} />
-            <Route exact path="/login" element={user ? <Home /> : <Login />} />
-            <Route exact path="/signup" element={user ? <Home /> : <SignUp />} />
-          </Routes>
-        </div>
-      );
-    }
+  return (
+    <div className="App">
+      <NavBar />
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/create" element={user ? <CreatePost /> : <Login />} />
+        <Route exact path="/post/:id" element={<SinglePost />} />
+        <Route exact path="/login" element={user ? <Home /> : <Login />} />
+        <Route exact path="/signup" element={user ? <Home /> : <SignUp />} />
+      </Routes>
+    </div>
+  );
+}
 
-    export default App;
+
+export default App;
 
 //sign up and log in use bcrypt on backend
 // As a blogger I want to be able to create an account so that I can create blogs.
