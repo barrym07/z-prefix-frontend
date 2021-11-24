@@ -4,14 +4,12 @@ import { Link } from "react-router-dom"
 import { Context } from "../context/Context"
 import axios from "axios"
 
-//successful login redirects to home page and shows users posts
-//response.data && window.location.replace("/?user="); need to figure out how to do this
 
 export default function Login({ host }) {
 
   const userRef = useRef();
   const passwordRef = useRef();
-  const { dispatch, isFetching } = useContext(Context);
+  const { dispatch } = useContext(Context);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { button } from '@mui/material'
+import { Button } from '@mui/material'
 import "./NavBar.css";
 import { Link } from 'react-router-dom';
 import { Context } from '../context/Context';
@@ -21,7 +21,7 @@ export default function NavBar() {
       {user ? (
         <>
           <Link to="/create" className="navbar-left link">Create Post</Link>
-          <button variant="text" className="navbar-right link" onClick={handleLogout}>Log Out</button>
+          <Button variant="text" className="navbar-right link" onClick={handleLogout}>Log Out</Button>
         </>
       ) : (
         <>

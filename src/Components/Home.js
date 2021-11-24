@@ -2,7 +2,7 @@ import Posts from "./Posts"
 import { useEffect, useState } from "react"
 import { useLocation } from "react-router"
 import axios from "axios"
-import { Box, Typography } from "@mui/material"
+import { Box } from "@mui/material"
 
 
 export default function Home({ posts, host }) {

@@ -21,13 +21,15 @@ function App() {
 
   function setHost() {
     let host;
-    if (process.env.NODE_ENV === 'development') {
-      host = "http://localhost:3001";
-      return host;
-    } else {
-      host = "https://barry-z-prefix-api.herokuapp.com/";
-      return host;
-    }
+    host = "https://barry-z-prefix-api.herokuapp.com";
+    // if (process.env.NODE_ENV === 'development') {
+    //   host = "http://localhost:3001";
+    //   return host;
+    // } else {
+    //   host = "https://barry-z-prefix-api.herokuapp.com";
+    //   return host;
+    // }
+    return host;
   }
   const getPosts = async () => {
     const response = await axios.get(`${setHost()}/blogs`);
