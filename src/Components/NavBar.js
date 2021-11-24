@@ -7,12 +7,12 @@ export default function NavBar() {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <Link to="/" className="navbar-brand">Home</Link>
-      <Link to="/create" className="navbar-left">Create Post</Link>
-      {user ? (<botton className="navbar-right">Log Out</botton>) : (
+      <Link to="/" className="navbar-brand link">Home</Link>
+      <Link to="/create" className="navbar-left link">Create Post</Link>
+      {user ? (<botton className="navbar-right link">Log Out</botton>) : (
         <>
-          <Link to="/signup" className="navbar-right">Sign Up</Link>
-          <Link to="/login" className="navbar-right">Login</Link>
+          <Link to="/signup" className="navbar-right link">Sign Up</Link>
+          <Link to="/login" className="navbar-right link">Login</Link>
         </>
 
       )

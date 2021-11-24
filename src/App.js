@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import NavBar from './Components/NavBar';
 import Home from './Components/Home';
@@ -28,29 +28,30 @@ function App() {
     //   return "http://localhost:5000";
     // }
   }
-
   const getPosts = async () => {
     const response = await axios.get(`${setHost()}/blogs`);
     setPosts(response.data);
-    console.log("posts:", posts);
-    console.log("response:", response.data);
-
   }
+
   useEffect(() => {
+
+
     getPosts();
   }, []);
 
+  console.log("posts:", posts);
 
 
   return (
     <div className="App">
       <NavBar />
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/create" element={user ? <CreatePost /> : <Login />} />
-        <Route exact path="/post/:id" element={<SinglePost />} />
-        <Route exact path="/login" element={user ? <Home /> : <Login />} />
-        <Route exact path="/signup" element={user ? <Home /> : <SignUp />} />
+        <Route exact path="/" element={<Home posts={posts} host={setHost()} />} />
+        <Route exact path="/create" element={user ? <CreatePost host={setHost()} /> : <Login />} />
+        <Route exact path="/post/:id" element={<SinglePost host={setHost()} />} />
+        <Route exact path="/login" element={user ? <Home /> : <Login host={setHost()} />} />
+        <Route exact path="/signup" element={user ? <Home /> : <SignUp host={setHost()} />} />
+
       </Routes>
     </div>
   );

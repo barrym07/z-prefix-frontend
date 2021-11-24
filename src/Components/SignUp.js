@@ -1,19 +1,42 @@
 import "./signUp.css"
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-export default function SignUp() {
+export default function SignUp({ host }) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await axios.post(`${host}/createuser`, {
+      username,
+      password
+    });
+
+  };
   return (
     <div className="signup">
       <h1>Sign Up</h1>
-      <form className="signUpForm">
+      <form className="signUpForm" onSubmit={handleSubmit}>
         <label>
           Username:
-          <input type="text" name="username" />
         </label>
+        <input
+          type="text"
+          name="username"
+          placeholder="Enter a username..."
+          onChange={e => setUsername(e.target.value)}
+        />
         <label>
           Password:
-          <input type="password" name="password" />
         </label>
-        <button className="signUpButton" >Sign Up</button>
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter a password..."
+          onChange={e => setPassword(e.target.value)}
+        />
+        <button className="signUpButton" type="submit">Sign Up</button>
       </form>
     </div>
   )
