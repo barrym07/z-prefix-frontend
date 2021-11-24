@@ -18,6 +18,8 @@ export default function SinglePost({ host }) {
   const getPost = async () => {
     const response = await axios.get(`${host}/blogs/${path}`);
     setPost(response.data[0]);
+    setTitle(response.data[0].title)
+    setBody(response.data[0].body)
   }
 
   useEffect(() => {
@@ -35,15 +37,30 @@ export default function SinglePost({ host }) {
     }
   }
 
+  const handleUpdate = async () => {
+    const newPost = {
+      title,
+      content: body
+    }
+    try {
+      const response = await axios.put(`${host}/blogs/${path}`, newPost);
+      response.data && window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
 
   return (
     <div className="single-post">
       <>
         {updateMode ?
           <>
-            <input type="text" value={post.title} />
+            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
             <br></br>
-            <textarea className="content-area" value={post.body} />
+            <textarea className="content-area" value={body} onChange={(e) => setBody(e.target.value)} />
+            <button onClick={handleUpdate}>Update</button>
           </>
           : (
             <>
