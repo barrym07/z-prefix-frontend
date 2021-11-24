@@ -24,10 +24,9 @@ function App() {
     if (process.env.NODE_ENV === 'development') {
       host = "http://localhost:3001";
       return host;
-    } // else {
-    //   //will need heroku url here
-    //   return "http://localhost:5000";
-    // }
+    } else {
+      return "https://barry-z-prefix-api.herokuapp.com/";
+    }
   }
   const getPosts = async () => {
     const response = await axios.get(`${setHost()}/blogs`);
