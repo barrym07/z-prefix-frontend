@@ -1,11 +1,9 @@
-// NEED TO RESET userPosts state when home page is loaded again
-
-import "./home.css"
 import Posts from "./Posts"
-import "./posts.css"
 import { useEffect, useState } from "react"
 import { useLocation } from "react-router"
 import axios from "axios"
+import { Box, Typography } from "@mui/material"
+
 
 export default function Home({ posts, host }) {
 
@@ -20,9 +18,8 @@ export default function Home({ posts, host }) {
       setUserPosts(response.data);
     }
     getUserPosts();
-
   }, [searchString])
-  console.log("userPosts:", userPosts);
+
 
   let renderedPosts = userPosts.length > 0 ?
     userPosts.map(post => (
@@ -33,17 +30,9 @@ export default function Home({ posts, host }) {
     ));
 
   return (
-    <div classname="home" >
-
+    <Box sx={{ mx: "auto", width: '100%', maxWidth: 500 }}>
       <h1>Wonderful Blog App</h1>
-      {/* {userPosts.map(post => (
-        <Posts key={post.id} post={post} />
-      ))}
-      {posts.map(post => (
-        <Posts post={post} />
-      ))} */}
       {renderedPosts}
-
-    </div>
+    </Box>
   );
 }

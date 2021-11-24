@@ -2,9 +2,13 @@ import axios from "axios";
 import { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import { Context } from "../context/Context";
 import "./createpost.css"
-//will use props
+
+
+
 export default function SinglePost({ host }) {
   const location = useLocation();
   const path = location.pathname.split("/")[2];
@@ -31,7 +35,6 @@ export default function SinglePost({ host }) {
       const response = await axios.delete(`${host}/blogs/${path}`);
       console.log(response);
       window.location.replace(`/?user=${user.user}`);
-
     } catch (error) {
       console.log(error);
     }
@@ -48,12 +51,11 @@ export default function SinglePost({ host }) {
     } catch (error) {
       console.log(error);
     }
-
   }
 
 
   return (
-    <div className="single-post">
+    <Box sx={{ mx: "auto", width: '100%' }}>
       <>
         {updateMode ?
           <>
@@ -68,24 +70,22 @@ export default function SinglePost({ host }) {
               <p>{post.body}</p>
             </>
           )
-
         }
-
       </>
-      <span>
-        <br />
-        by:<Link to={`/?user=${post.user_name}`} className="link">
-          <p>{post.user_name}</p>
+      <Typography variant="button" display="block" gutterBottom>
+        by: <Link to={`/?user=${post.user_name}`} className="link">
+          {post.user_name}
         </Link>
-      </span>
-      <p>Posted: {new Date(post.created_at).toDateString()}</p>
+      </Typography>
+      <Typography variant="caption" display="block" gutterBottom>
+        Posted: {new Date(post.created_at).toDateString()}
+      </Typography>
       {post.user_name === user?.user && (
         <>
           <button onClick={handleDelete}>Delete</button>
           <button onClick={() => setUpdateMode(true)} >Edit</button>
         </>
       )}
-
-    </div>
+    </Box>
   );
 }
