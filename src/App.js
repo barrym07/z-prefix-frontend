@@ -25,7 +25,7 @@ function App() {
       host = "http://localhost:3001";
       return host;
     } else {
-      return "https://barry-z-prefix-api.herokuapp.com/";
+      return host = "https://barry-z-prefix-api.herokuapp.com/";
     }
   }
   const getPosts = async () => {
