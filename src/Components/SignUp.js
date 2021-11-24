@@ -8,10 +8,15 @@ export default function SignUp({ host }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post(`${host}/createuser`, {
-      username,
-      password
-    });
+    try {
+      const response = await axios.post(`${host}/createuser`, {
+        username,
+        password
+      });
+      response.data && window.location.replace("/login");
+    } catch (error) {
+      console.log(error);
+    }
 
   };
   return (
