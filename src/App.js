@@ -40,9 +40,6 @@ function App() {
     getPosts();
   }, []);
 
-  console.log("posts:", posts);
-
-
   return (
     <div className="App">
       <NavBar />

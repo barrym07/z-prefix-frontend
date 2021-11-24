@@ -5,7 +5,6 @@ import Reducer from "./Reducer"
 
 const INITIAL_STATE = {
   user: JSON.parse(localStorage.getItem("user")) || null,
-  isFetching: false,
   error: false
 };
 
@@ -20,7 +19,6 @@ export const ContextProvider = ({ children }) => {
 
   // const valueObj = {
   //   user: state.user,
-  //   isFetching: state.isFetching,
   //   error: state.error,
   //   dispatch
   // };
@@ -28,7 +26,6 @@ export const ContextProvider = ({ children }) => {
   return (
     <Context.Provider value={{
       user: state.user,
-      isFetching: state.isFetching,
       error: state.error,
       dispatch
     }}>
